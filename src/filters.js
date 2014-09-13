@@ -187,6 +187,10 @@ var filters = {
     },
 
     replace: function(str, old, new_, maxCount) {
+        if (old.constructor === RegExp) {
+            return str.replace(old, new_);
+        }
+
         var res = str;
         var last = res;
         var count = 1;

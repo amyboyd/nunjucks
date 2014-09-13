@@ -72,6 +72,10 @@
                     if(!ofield) {
                         expect(value).to.be(ofield);
                     }
+                    else if (ofield !== null && ofield.constructor === RegExp) {
+                        // This conditional check for RegExp is needed because /a/ != /a/
+                        expect(String(ofield)).to.be(String(value));
+                    }
                     else {
                         expect(ofield).to.be(value);
                     }
@@ -153,6 +157,11 @@
                   [nodes.Root,
                    [nodes.Output,
                     [nodes.Symbol, 'foo']]]);
+
+            isAST(parser.parse("{{ r/23/ }}"),
+                  [nodes.Root,
+                   [nodes.Output,
+                     [nodes.Literal, new RegExp('23')]]]);
         });
 
         it('should parse aggregate types', function() {
