@@ -838,7 +838,7 @@ var Parser = Object.extend({
             }
         }
         else if (tok.type == lexer.TOKEN_REGEX) {
-            val = new RegExp(tok.value);
+            val = new RegExp(tok.value.body, tok.value.flags);
         }
 
         if(val !== null) {
