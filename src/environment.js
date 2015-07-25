@@ -238,8 +238,8 @@ var Context = Obj.extend({
         this.blocks = {};
         this.exported = [];
 
-        for(var name in blocks) {
-            this.addBlock(name, blocks[name]);
+        for(var blockName in blocks) {
+            this.addBlock(blockName, blocks[blockName]);
         }
 
         if (name) {
@@ -366,7 +366,7 @@ var Template = Obj.extend({
         return lib.withPrettyErrors(this.path, this.env.dev, function() {
             this.compile();
 
-            var context = new Context(ctx || {}, this.blocks, this.name);
+            var context = new Context(Object.create(ctx || {}), this.blocks, this.name);
             var syncResult = null;
 
             this.rootRenderFunc(this.env,

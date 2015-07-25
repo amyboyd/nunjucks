@@ -995,6 +995,17 @@
 
                 finish(done);
             });
+
+            it('should keep value when context is changing', function(done) {
+                equal('{% include "filename-and-dirname-complex.html" %}',
+                      {},
+                      'filename-and-dirname-complex.html ~ \n' +
+                      'dir/filename-and-dirname-2.html ~ dir\n' +
+                      'filename-and-dirname-complex.html ~ \n' +
+                      'lorem ipsum\n');
+
+                finish(done);
+            });
         });
     });
 })();
